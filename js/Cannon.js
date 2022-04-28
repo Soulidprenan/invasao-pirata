@@ -1,5 +1,5 @@
 class Cannon {
-  constructor(x, y, width, height, angle,image,baseImage) {
+  constructor(x, y, width, height, angle, image, baseImage) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -7,15 +7,12 @@ class Cannon {
     this.angle = angle;
     this.image = image;
     this.baseImage = baseImage;
-    
-    
   }
-  display(){
+  display() {
     push();
     imageMode(CENTER);
-    image(this.image,this.x,this.y,this.width,this.height);
+    image(this.image, this.x, this.y, this.width, this.height);
     pop();
-    image(this.baseImage,70,20,200,200);
-
+    image(this.baseImage, 70, 20, 200, 200);
   }
 }

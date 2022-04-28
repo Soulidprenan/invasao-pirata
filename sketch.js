@@ -4,6 +4,7 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 var engine, world, backgroundImg;
 var cannonBase,cannonImg;
+var cannonBall;
 
 var canvas, angle, tower, ground, cannon;
 
@@ -31,6 +32,7 @@ function setup() {
   World.add(world, tower);
 
   cannon = new Cannon(180,110,160,130,angle,cannonImg,cannonBase); 
+  cannonBall = new CannonBall(cannon.x,cannon.y,30);
 
 }
 
@@ -48,4 +50,5 @@ function draw() {
   pop();  
 
   cannon.display();
+  cannonBall.display();
 }
