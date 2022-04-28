@@ -10,8 +10,10 @@ class Cannon {
   }
   display() {
     push();
+    translate(this.x, this.y);
+    rotate(this.angle);
     imageMode(CENTER);
-    image(this.image, this.x, this.y, this.width, this.height);
+    image(this.image, 0, 0, this.width, this.height);
     pop();
     image(this.baseImage, 70, 20, 200, 200);
   }

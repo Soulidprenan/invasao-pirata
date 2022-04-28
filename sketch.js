@@ -6,7 +6,7 @@ var engine, world, backgroundImg;
 var cannonBase,cannonImg;
 var cannonBall;
 
-var canvas, angle, tower, ground, cannon;
+var canvas, angle = 20, tower, ground, cannon;
 
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
@@ -34,6 +34,7 @@ function setup() {
   cannon = new Cannon(180,110,160,130,angle,cannonImg,cannonBase); 
   cannonBall = new CannonBall(cannon.x,cannon.y,30);
 
+  angleMode(DEGREES);
 }
 
 function draw() {
