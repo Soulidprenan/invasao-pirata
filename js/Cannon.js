@@ -9,7 +9,19 @@ class Cannon {
     this.baseImage = baseImage;
   }
   display() {
+    if (keyIsDown(UP_ARROW)&& this.angle > -30){
+      this.angle  -= 1;
+
+
+
+    }
+    if(keyIsDown(DOWN_ARROW)&& this.angle < 70){
+      this.angle += 1;
+
+
+    }
     push();
+    
     translate(this.x, this.y);
     rotate(this.angle);
     imageMode(CENTER);
