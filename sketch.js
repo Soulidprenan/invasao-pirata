@@ -1,6 +1,7 @@
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
+const Body = Matter.Body;
 const Constraint = Matter.Constraint;
 var engine, world, backgroundImg;
 var cannonBase,cannonImg;
@@ -52,4 +53,14 @@ function draw() {
 
   cannon.display();
   cannonBall.display();
+}
+
+
+function keyPressed() {
+  if(keyCode == RIGHT_ARROW) {
+    cannonBall.shoot();
+  }
+
+  // "2" == 2
+  // "2" === 2
 }
