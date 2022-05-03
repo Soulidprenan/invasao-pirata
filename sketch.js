@@ -6,6 +6,7 @@ const Constraint = Matter.Constraint;
 var engine, world, backgroundImg;
 var cannonBase,cannonImg;
 var cannonBall;
+var cannonBallGroup = [];
 
 var canvas, angle = 20, tower, ground, cannon;
 
@@ -33,7 +34,7 @@ function setup() {
   World.add(world, tower);
 
   cannon = new Cannon(180,110,160,130,angle,cannonImg,cannonBase); 
-  cannonBall = new CannonBall(cannon.x,cannon.y,30);
+  
 
   angleMode(DEGREES);
 }
@@ -52,15 +53,40 @@ function draw() {
   pop();  
 
   cannon.display();
-  cannonBall.display();
+  //cannonBall.display();
+  for (var i = 0; i < cannonBallGroup.length; i = i + 1){
+    if (cannonBallGroup[i]){
+      cannonBallGroup[i].display();
+
+
+    }
+
+
+  }
 }
 
 
-function keyPressed() {
+function keyReleased() {
   if(keyCode == RIGHT_ARROW) {
-    cannonBall.shoot();
+ cannonBallGroup[cannonBallGroup.length - 1].shoot();
   }
 
   // "2" == 2
   // "2" === 2
+}
+
+function keyPressed(){
+if(keyCode == RIGHT_ARROW) {
+  cannonBall = new CannonBall(cannon.x,cannon.y,30);
+cannonBallGroup.push(cannonBall);
+console.log(cannonBallGroup);
+
+
+}
+
+
+
+
+
+
 }
