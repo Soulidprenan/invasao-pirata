@@ -8,6 +8,7 @@ var cannonBase, cannonImg;
 var cannonBall;
 var cannonBallGroup = [];
 var barco;
+var barcos = [];
 
 var canvas,
   angle = 20,
@@ -39,8 +40,6 @@ function setup() {
 
   cannon = new Cannon(180, 110, 160, 130, angle, cannonImg, cannonBase);
 
-  barco = new Navio(250, 500, 170, 170, -60);
-
   angleMode(DEGREES);
 }
 
@@ -56,7 +55,9 @@ function draw() {
   pop();
 
   cannon.display();
-  barco.display();
+  
+  showNavios();
+
   //cannonBall.display();
   for (var i = 0; i < cannonBallGroup.length; i = i + 1) {
     if (cannonBallGroup[i]) {
@@ -72,6 +73,20 @@ function keyReleased() {
 
   // "2" == 2
   // "2" === 2
+}
+
+function showNavios() {
+  if(barcos.length > 0) {
+    // perguntar se o anterior já passou x pixels
+    // display
+    // velocidade
+    // var options = [-60, -40, -70, -20]
+    // Math.round(random())
+  } else {
+    // cria direto
+    barco = new Navio(width, height - 60, 170, 170, -60);
+    barcos.push(barco);
+  }
 }
 
 function keyPressed() {
