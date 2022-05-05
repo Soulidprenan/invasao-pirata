@@ -7,6 +7,7 @@ var engine, world, backgroundImg;
 var cannonBase, cannonImg;
 var cannonBall;
 var cannonBallGroup = [];
+var barco;
 
 var canvas,
   angle = 20,
@@ -38,6 +39,8 @@ function setup() {
 
   cannon = new Cannon(180, 110, 160, 130, angle, cannonImg, cannonBase);
 
+  barco = new Navio(250, 500, 170, 170, -60);
+
   angleMode(DEGREES);
 }
 
@@ -53,6 +56,7 @@ function draw() {
   pop();
 
   cannon.display();
+  barco.display();
   //cannonBall.display();
   for (var i = 0; i < cannonBallGroup.length; i = i + 1) {
     if (cannonBallGroup[i]) {
