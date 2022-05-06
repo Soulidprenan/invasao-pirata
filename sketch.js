@@ -55,7 +55,7 @@ function draw() {
   pop();
 
   cannon.display();
-  
+
   showNavios();
 
   //cannonBall.display();
@@ -76,12 +76,28 @@ function keyReleased() {
 }
 
 function showNavios() {
-  if(barcos.length > 0) {
+  if (barcos.length > 0) {
     // perguntar se o anterior já passou x pixels
-    // display
+    if (
+      barcos[barcos.length - 1] == undefined ||
+      barcos[barcos.length - 1].navio.position.x < width - 300
+    ) {
+      var options = [-60, -40, -70, -20];
+      barco = new Navio(
+        width,
+        height - 60,
+        170,
+        170,
+        Math.round(random(options))
+      );
+      barcos.push(barco);
+    }
+    for (var i = 0; i < barcos.length; i = i + 1) {
+      barcos[i].display();
+     Body.setVelocity(barcos[i].navio,{x:-0.9,y:0});
+    }
+
     // velocidade
-    // var options = [-60, -40, -70, -20]
-    // Math.round(random())
   } else {
     // cria direto
     barco = new Navio(width, height - 60, 170, 170, -60);
