@@ -21,4 +21,13 @@ class Navio {
     image(this.image, 0, this.navioPos, this.width, this.height);
     pop();
   }
+  remove(index) {
+    if (barcos[index]) {
+      World.remove(world, barcos[index].navio);
+      // arrow function / função anônima
+      setTimeout(() => {
+        delete barcos[index];
+      }, 1000);
+    }
+  }
 }

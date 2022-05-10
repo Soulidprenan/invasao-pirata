@@ -43,4 +43,13 @@ class CannonBall {
       y: velocity.y * (180 / 3.14),
     });
   }
+  removeBall(index) {
+    if (cannonBallGroup[index]) {
+      World.remove(world, cannonBallGroup[index].ball);
+
+      setTimeout(() => {
+        delete cannonBallGroup[index];
+      }, 1000);
+    }
+  }
 }

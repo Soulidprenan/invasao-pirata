@@ -62,6 +62,10 @@ function draw() {
   for (var i = 0; i < cannonBallGroup.length; i = i + 1) {
     if (cannonBallGroup[i]) {
       cannonBallGroup[i].display();
+      if (cannonBallGroup[i].ball.position.x > width || cannonBallGroup[i].ball.position.y >= height - 50){
+        cannonBallGroup[i].removeBall(i);
+      }
+      this.colisionBoat(i);
     }
   }
 }
@@ -93,8 +97,10 @@ function showNavios() {
       barcos.push(barco);
     }
     for (var i = 0; i < barcos.length; i = i + 1) {
-      barcos[i].display();
-     Body.setVelocity(barcos[i].navio,{x:-0.9,y:0});
+      if (barcos[i]) {
+        barcos[i].display();
+        Body.setVelocity(barcos[i].navio, { x: -0.9, y: 0 });
+      }
     }
 
     // velocidade
@@ -110,5 +116,23 @@ function keyPressed() {
     cannonBall = new CannonBall(cannon.x, cannon.y, 30);
     cannonBallGroup.push(cannonBall);
     console.log(cannonBallGroup);
+    cannonBall.trajetoria = [];
+  }
+}
+
+function colisionBoat(index) {
+  for (var i = 0; i < barcos.length; i = i + 1) {
+    if (barcos[i] != undefined && cannonBallGroup[index] != undefined) {
+      var colision = Matter.SAT.collides(
+        cannonBallGroup[index].ball,
+        barcos[i].navio
+      );
+
+      if (colision.collided == true) {
+        World.remove(world, cannonBallGroup[index].ball);
+        delete cannonBallGroup[index];
+        barcos[i].remove(i);
+      }
+    }
   }
 }
