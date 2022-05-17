@@ -9,6 +9,9 @@ var cannonBall;
 var cannonBallGroup = [];
 var barco;
 var barcos = [];
+// pega cada posição do spritesheet
+var boatAnimation = [];
+var boatSpriteData, boatSpriteSheet;
 
 var canvas,
   angle = 20,
@@ -21,6 +24,10 @@ function preload() {
   towerImage = loadImage("./assets/tower.png");
   cannonBase = loadImage("./assets/cannonBase.png");
   cannonImg = loadImage("./assets/canon.png");
+
+  boatSpriteData = loadJSON("./assets/boat/ship-sailing.json");
+  boatSpriteSheet = loadImage("./assets/boat/ship-sailing.png");
+ 
 }
 
 function setup() {
@@ -41,6 +48,14 @@ function setup() {
   cannon = new Cannon(180, 110, 160, 130, angle, cannonImg, cannonBase);
 
   angleMode(DEGREES);
+
+  var boatFrames = boatSpriteData.frames;
+  for (var i = 0; i < boatFrames.length; i++) {
+    var pos = boatFrames[i].position;
+    var img = boatSpriteSheet.get(pos.x, pos.y, pos.w, pos.h);
+    boatAnimation.push(img);
+  }
+
 }
 
 function draw() {
@@ -92,13 +107,15 @@ function showNavios() {
         height - 60,
         170,
         170,
-        Math.round(random(options))
+        Math.round(random(options)),
+        boatAnimation
       );
       barcos.push(barco);
     }
     for (var i = 0; i < barcos.length; i = i + 1) {
       if (barcos[i]) {
         barcos[i].display();
+        barcos[i].animate();
         Body.setVelocity(barcos[i].navio, { x: -0.9, y: 0 });
       }
     }
@@ -106,7 +123,7 @@ function showNavios() {
     // velocidade
   } else {
     // cria direto
-    barco = new Navio(width, height - 60, 170, 170, -60);
+    barco = new Navio(width, height - 60, 170, 170, -60, boatAnimation);
     barcos.push(barco);
   }
 }
@@ -115,7 +132,6 @@ function keyPressed() {
   if (keyCode == RIGHT_ARROW) {
     cannonBall = new CannonBall(cannon.x, cannon.y, 30);
     cannonBallGroup.push(cannonBall);
-    console.log(cannonBallGroup);
     cannonBall.trajetoria = [];
   }
 }
