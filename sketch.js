@@ -12,6 +12,8 @@ var barcos = [];
 // pega cada posição do spritesheet
 var boatAnimation = [];
 var boatSpriteData, boatSpriteSheet;
+var brokenBoatAnimation = [];
+var brokenBoatSpriteData, brokenBoatSpriteSheet;
 
 var canvas,
   angle = 20,
@@ -27,7 +29,9 @@ function preload() {
 
   boatSpriteData = loadJSON("./assets/boat/ship-sailing.json");
   boatSpriteSheet = loadImage("./assets/boat/ship-sailing.png");
- 
+
+  brokenBoatSpriteData = loadJSON("./assets/boat/broken-ship-01.json");
+  brokenBoatSpriteSheet = loadImage("./assets/boat/broken-ship-01.png");
 }
 
 function setup() {
@@ -55,7 +59,12 @@ function setup() {
     var img = boatSpriteSheet.get(pos.x, pos.y, pos.w, pos.h);
     boatAnimation.push(img);
   }
-
+  var brokenBoatFrames = brokenBoatSpriteData.frames;
+  for (var i = 0; i < brokenBoatFrames.length; i++) {
+    var pos = brokenBoatFrames[i].frame;
+    var img = brokenBoatSpriteSheet.get(pos.x, pos.y, pos.w, pos.h);
+    brokenBoatAnimation.push(img);
+  }
 }
 
 function draw() {
@@ -77,7 +86,10 @@ function draw() {
   for (var i = 0; i < cannonBallGroup.length; i = i + 1) {
     if (cannonBallGroup[i]) {
       cannonBallGroup[i].display();
-      if (cannonBallGroup[i].ball.position.x > width || cannonBallGroup[i].ball.position.y >= height - 50){
+      if (
+        cannonBallGroup[i].ball.position.x > width ||
+        cannonBallGroup[i].ball.position.y >= height - 50
+      ) {
         cannonBallGroup[i].removeBall(i);
       }
       this.colisionBoat(i);
